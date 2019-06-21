@@ -14,8 +14,6 @@ import stubs.model.GameType;
 import stubs.model.SimpleCard;
 import org.apache.avro.mapred.AvroValue;
 import org.apache.avro.mapred.AvroKey;
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 
 

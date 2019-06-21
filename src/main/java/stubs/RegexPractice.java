@@ -32,6 +32,19 @@ public class RegexPractice {
 			
 		}
 		
+		String line1 = "131256,\"Feuer, Eis & Dosenbier (2002)\",Comedy";
+		
+		String[] columns = line1.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)",-1);
+		
+		for (String column: columns) {
+			System.out.println("1" + column);
+		}
+		
+		String example = "Sci-Fi (no genres listed) Film-Noir";
+		example = example.replace("-",  "").replace(" ", "").
+				replace("(", "").replace(")", "");
+		
+		System.out.println(example);
 
 	}
 

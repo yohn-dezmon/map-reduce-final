@@ -1,0 +1,20 @@
+{"namespace": "finalproj.model",
+"type": "record",
+ "name": "Movie",
+ "fields": [
+     {"name": "id", "type": "string", "default" : "", "doc" : "The ID of the movie"},
+     {"name": "title", "type": "string", "default" : "", "doc" : "The title of the movie"},
+     {"name": "year", "type": "string", "default" : "", "doc" : "The year the movie was released"},
+     {
+      "name": "genre", "doc" : "Genre of the movie",
+      "type" : {
+        "type" : "enum",
+      "name" : "MovieGenre",
+      "symbols" : ["Comedy", "Romance", "Adventure", "Action", "Animation",
+      "Children", "Crime", "Documentary", "Drama", "Fantasy", "FilmNoir", "Horror", "Musical",
+      "Mystery", "SciFi", "Thriller", "War", "Western", "nogenreslisted", "IMAX"]
+     },
+    "default" : "nogenreslisted"
+   }
+ ]
+}
