@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.bigdatainstitute.avromr</groupId>
+  <artifactId>avromr</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <properties>
+  	<!-- Keep Hadoop versions as properties to allow easy modification -->
+    <hadoop.version>2.6.0-cdh5.13.1</hadoop.version>
+    <avro.version>1.8.1</avro.version>
+    <mrunit.version>1.1.0</mrunit.version>
+    <!-- Maven properties for compilation -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+  <dependencies>
+  	<!-- Add the Hadoop dependency -->
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-client</artifactId>
+      <version>${hadoop.version}</version>
+    </dependency>
+	<dependency>
+		<groupId>org.apache.avro</groupId>
+		<artifactId>avro</artifactId>
+		<version>${avro.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.avro</groupId>
+		<artifactId>avro-mapred</artifactId>
+		<version>${avro.version}</version>
+		<classifier>hadoop2</classifier>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.avro</groupId>
+		<artifactId>avro-tools</artifactId>
+		<version>${avro.version}</version>
+	</dependency>
+	 <!-- Add the MRUnit dependency -->
+    <dependency>
+      <groupId>org.apache.mrunit</groupId>
+      <artifactId>mrunit</artifactId>
+      <version>${mrunit.version}</version>
+      <classifier>hadoop2</classifier> 
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+      	<!-- Set the Java target version to 1.7 -->
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.0</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+      <plugin>
+		  <groupId>org.apache.avro</groupId>
+		  <artifactId>avro-maven-plugin</artifactId>
+		  <version>${avro.version}</version>
+		  <executions>
+			<execution>
+			  <phase>generate-sources</phase>
+			  <goals>
+				<goal>schema</goal>
+			  </goals>
+			  <configuration>
+				<sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+				<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+			  </configuration>
+			</execution>
+		  </executions>
+		</plugin>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <version>2.9</version>
+        <configuration>
+            <downloadJavadocs>true</downloadJavadocs>
+        </configuration>
+    </plugin>
+    </plugins>
+  </build>
+</project>

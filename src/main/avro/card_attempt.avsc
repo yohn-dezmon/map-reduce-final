@@ -1,0 +1,49 @@
+{"namespace": "stubs.model",
+"type" : "record",
+"name" : "SimpleCard",
+"fields" : [
+	{"name": "date",
+		"type": "string",
+		"default": "", 
+		"doc": "The date the card was played"
+		},
+		{
+		"name": "time",
+		"type": "string",
+		"default": "",
+		"doc": "The time the card was played"
+		},
+		{
+		"name": "gameId",
+		"type": "string",
+		"default": "",
+		"doc": "The ID of the game"
+		},
+		{
+		"name": "game",
+		"doc": "The game that the card is used for",
+		"type": {
+		"type": "enum",
+		"name": "GameType",
+		"symbols": ["TexasHoldem", "Blackjack", "PaiGow", "FiveCardDraw"]
+		},
+		"default": "TexasHoldem"
+		},
+		{
+		"name": "suit",
+		"doc": "The suit of the card",
+		"type": {
+		"type": "enum",
+		"name": "CardSuit",
+		"symbols" : ["SPADE", "HEART", "DIAMOND", "CLUB"]
+		},
+		"default" : "SPADE"
+		},
+		{
+		"name": "cardValue",
+		"type": "string",
+		"default" : "",
+		"doc": "the value of the card"
+		}
+	]
+}	
