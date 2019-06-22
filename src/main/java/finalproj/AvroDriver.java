@@ -56,6 +56,9 @@ Configured implements Tool{
 
 		boolean success = job.waitForCompletion(true);
 		
+		// I think the counter should go here?
+//		long number
+		
 		if (success == false) {
             System.err.println("First phase failed");
             return 1;
@@ -71,9 +74,14 @@ Configured implements Tool{
 		countJob.setInputFormatClass(AvroKeyValueInputFormat.class);
 		countJob.setOutputFormatClass(AvroKeyValueOutputFormat.class);
 		
-		
+		// set mapper
 		countJob.setMapperClass(AvroMovieMapper.class);
+		// set partitioner
+		countJob.setPartitionerClass(MoviePartitioner.class);
+		// set reducer 
 		countJob.setReducerClass(MovieReducer.class);
+		// set number of reduce tasks 
+		countJob.setNumReduceTasks(4);
 		
 		countJob.setMapOutputKeyClass(MovieGenre.class);
 		countJob.setMapOutputValueClass(SimpleCard.class);
