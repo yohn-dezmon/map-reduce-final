@@ -7,7 +7,7 @@ I decided to use a different data source than the previous examples, and found
 this data set which lists Movies and their genres here:  
 https://grouplens.org/datasets/movielens/
 
-My MapReduce java code for this project can be found in the src/main/java/finalproj.  
+The MapReduce java code for this project can be found in the src/main/java/finalproj.  
 The models that resulted from my use of Avro schemas can be found in finalproj.model.
 
 

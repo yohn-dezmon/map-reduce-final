@@ -56,15 +56,12 @@ Mapper<LongWritable, Text, AvroKey<Movie>, AvroValue<NullWritable>>
 			
 		}
 		else if ((columns.length == 3) && columns[2] != "genres") {
-			logger.info("wtf " + row);
 			String id = columns[0];
 			String title = columns[1];
 			
 			String genrePreSplit = columns[2];
 			String[] genres = genrePreSplit.split("\\|");
-			for (String genre: genres) {
-				System.out.println(genre);
-			}
+			
 			for (String genre: genres) {
 				genre = genre.replace("-",  "").replace(" ", "").
 						replace("(", "").replace(")", "");
@@ -72,7 +69,6 @@ Mapper<LongWritable, Text, AvroKey<Movie>, AvroValue<NullWritable>>
 				movie.setGenre(MovieGenre.valueOf(genre));
 				movie.setId(id);
 				movie.setTitle(title);
-				System.out.println("Does it do this more than once?");
 				context.write(new AvroKey<Movie>(movie), new AvroValue<NullWritable>(NullWritable.get()));
 			}
 		}

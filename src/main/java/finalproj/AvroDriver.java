@@ -16,6 +16,7 @@ import org.apache.avro.mapreduce.AvroKeyValueInputFormat;
 
 
 import finalproj.model.Movie;
+import finalproj.model.MovieGenre;
 
 
 
@@ -40,53 +41,53 @@ Configured implements Tool{
 		Job job = Job.getInstance();
 		job.setJarByClass(AvroDriver.class);
         job.setJobName("Movie Genre Mapper");
-//		
+		
 		FileInputFormat.setInputPaths(job, new Path(input));
 		FileOutputFormat.setOutputPath(job, new Path(output + "-etl"));
-//		
+		
 		job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(AvroKeyValueOutputFormat.class);
-//		
+		
         job.setMapperClass(MovieMapper.class);
         job.setNumReduceTasks(0);
-//        
+        
 		AvroJob.setOutputKeySchema(job, Movie.getClassSchema());
 		AvroJob.setOutputValueSchema(job, Schema.create(Schema.Type.NULL));
-//
+
 		boolean success = job.waitForCompletion(true);
-//		
+		
 		if (success == false) {
             System.err.println("First phase failed");
             return 1;
         }
-//		
-//		Job countJob = Job.getInstance();
-//		countJob.setJarByClass(AvroDriver.class);
-//        countJob.setJobName("Counter");
-//        
-//        FileInputFormat.setInputPaths(countJob, new Path(output + "-etl"));
-//		FileOutputFormat.setOutputPath(countJob, new Path(output));
-//		
-//		countJob.setInputFormatClass(AvroKeyValueInputFormat.class);
-//		countJob.setOutputFormatClass(AvroKeyValueOutputFormat.class);
-//		
-//		
-//		countJob.setMapperClass(CardMapper.class);
-//		countJob.setReducerClass(CardTotalReducer.class);
-//		
-//		countJob.setMapOutputKeyClass(CardSuit.class);
-//		countJob.setMapOutputValueClass(SimpleCard.class);
-//		
-//		AvroJob.setInputKeySchema(countJob, SimpleCard.getClassSchema());
-//		AvroJob.setInputValueSchema(countJob, Schema.create(Schema.Type.NULL));
-//		
-//		AvroJob.setMapOutputKeySchema(countJob, CardSuit.getClassSchema());
-//		AvroJob.setMapOutputValueSchema(countJob, SimpleCard.getClassSchema());
-//		
-//		AvroJob.setOutputKeySchema(countJob, CardSuit.getClassSchema());
-//		AvroJob.setOutputValueSchema(countJob, Schema.create(Schema.Type.INT));
-//		
-//		success = countJob.waitForCompletion(true);
+		
+		Job countJob = Job.getInstance();
+		countJob.setJarByClass(AvroDriver.class);
+		countJob.setJobName("Counter");
+        
+        FileInputFormat.setInputPaths(countJob, new Path(output + "-etl"));
+		FileOutputFormat.setOutputPath(countJob, new Path(output));
+		
+		countJob.setInputFormatClass(AvroKeyValueInputFormat.class);
+		countJob.setOutputFormatClass(AvroKeyValueOutputFormat.class);
+		
+		
+		countJob.setMapperClass(AvroMovieMapper.class);
+		countJob.setReducerClass(MovieReducer.class);
+		
+		countJob.setMapOutputKeyClass(MovieGenre.class);
+		countJob.setMapOutputValueClass(SimpleCard.class);
+		
+		AvroJob.setInputKeySchema(countJob, Movie.getClassSchema());
+		AvroJob.setInputValueSchema(countJob, Schema.create(Schema.Type.NULL));
+		
+		AvroJob.setMapOutputKeySchema(countJob, MovieGenre.getClassSchema());
+		AvroJob.setMapOutputValueSchema(countJob, Movie.getClassSchema());
+		
+		AvroJob.setOutputKeySchema(countJob, MovieGenre.getClassSchema());
+		AvroJob.setOutputValueSchema(countJob, Schema.create(Schema.Type.INT));
+		
+		success = countJob.waitForCompletion(true);
 		
 		return success ? 0 : 1;
 		
