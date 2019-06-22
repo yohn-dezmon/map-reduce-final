@@ -10,8 +10,8 @@ import org.apache.avro.specific.SpecificData;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Movie extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8140288460142937592L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Movie\",\"namespace\":\"finalproj.model\",\"fields\":[{\"name\":\"id\",\"type\":\"string\",\"doc\":\"The ID of the movie\",\"default\":\"\"},{\"name\":\"title\",\"type\":\"string\",\"doc\":\"The title of the movie\",\"default\":\"\"},{\"name\":\"year\",\"type\":\"string\",\"doc\":\"The year the movie was released\",\"default\":\"\"},{\"name\":\"genre\",\"type\":{\"type\":\"enum\",\"name\":\"MovieGenre\",\"symbols\":[\"Comedy\",\"Romance\",\"Adventure\",\"Action\",\"Animation\",\"Children\",\"Crime\",\"Documentary\",\"Drama\",\"Fantasy\",\"FilmNoir\",\"Horror\",\"Musical\",\"Mystery\",\"SciFi\",\"Thriller\",\"War\",\"Western\",\"nogenreslisted\",\"IMAX\"]},\"doc\":\"Genre of the movie\",\"default\":\"nogenreslisted\"}]}");
+  private static final long serialVersionUID = 963523182672107004L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Movie\",\"namespace\":\"finalproj.model\",\"fields\":[{\"name\":\"id\",\"type\":\"string\",\"doc\":\"The ID of the movie\",\"default\":\"\"},{\"name\":\"title\",\"type\":\"string\",\"doc\":\"The title of the movie\",\"default\":\"\"},{\"name\":\"year\",\"type\":\"string\",\"doc\":\"The year the movie was released\",\"default\":\"\"},{\"name\":\"count\",\"type\":\"int\",\"doc\":\"This is the count for the Combiner\",\"default\":0},{\"name\":\"genre\",\"type\":{\"type\":\"enum\",\"name\":\"MovieGenre\",\"symbols\":[\"Comedy\",\"Romance\",\"Adventure\",\"Action\",\"Animation\",\"Children\",\"Crime\",\"Documentary\",\"Drama\",\"Fantasy\",\"FilmNoir\",\"Horror\",\"Musical\",\"Mystery\",\"SciFi\",\"Thriller\",\"War\",\"Western\",\"nogenreslisted\",\"IMAX\"]},\"doc\":\"Genre of the movie\",\"default\":\"nogenreslisted\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   /** The ID of the movie */
   @Deprecated public java.lang.CharSequence id;
@@ -19,6 +19,8 @@ public class Movie extends org.apache.avro.specific.SpecificRecordBase implement
   @Deprecated public java.lang.CharSequence title;
   /** The year the movie was released */
   @Deprecated public java.lang.CharSequence year;
+  /** This is the count for the Combiner */
+  @Deprecated public int count;
   /** Genre of the movie */
   @Deprecated public finalproj.model.MovieGenre genre;
 
@@ -34,12 +36,14 @@ public class Movie extends org.apache.avro.specific.SpecificRecordBase implement
    * @param id The ID of the movie
    * @param title The title of the movie
    * @param year The year the movie was released
+   * @param count This is the count for the Combiner
    * @param genre Genre of the movie
    */
-  public Movie(java.lang.CharSequence id, java.lang.CharSequence title, java.lang.CharSequence year, finalproj.model.MovieGenre genre) {
+  public Movie(java.lang.CharSequence id, java.lang.CharSequence title, java.lang.CharSequence year, java.lang.Integer count, finalproj.model.MovieGenre genre) {
     this.id = id;
     this.title = title;
     this.year = year;
+    this.count = count;
     this.genre = genre;
   }
 
@@ -50,7 +54,8 @@ public class Movie extends org.apache.avro.specific.SpecificRecordBase implement
     case 0: return id;
     case 1: return title;
     case 2: return year;
-    case 3: return genre;
+    case 3: return count;
+    case 4: return genre;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -62,7 +67,8 @@ public class Movie extends org.apache.avro.specific.SpecificRecordBase implement
     case 0: id = (java.lang.CharSequence)value$; break;
     case 1: title = (java.lang.CharSequence)value$; break;
     case 2: year = (java.lang.CharSequence)value$; break;
-    case 3: genre = (finalproj.model.MovieGenre)value$; break;
+    case 3: count = (java.lang.Integer)value$; break;
+    case 4: genre = (finalproj.model.MovieGenre)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -116,6 +122,23 @@ public class Movie extends org.apache.avro.specific.SpecificRecordBase implement
    */
   public void setYear(java.lang.CharSequence value) {
     this.year = value;
+  }
+
+  /**
+   * Gets the value of the 'count' field.
+   * @return This is the count for the Combiner
+   */
+  public java.lang.Integer getCount() {
+    return count;
+  }
+
+  /**
+   * Sets the value of the 'count' field.
+   * This is the count for the Combiner
+   * @param value the value to set.
+   */
+  public void setCount(java.lang.Integer value) {
+    this.count = value;
   }
 
   /**
@@ -173,6 +196,8 @@ public class Movie extends org.apache.avro.specific.SpecificRecordBase implement
     private java.lang.CharSequence title;
     /** The year the movie was released */
     private java.lang.CharSequence year;
+    /** This is the count for the Combiner */
+    private int count;
     /** Genre of the movie */
     private finalproj.model.MovieGenre genre;
 
@@ -199,9 +224,13 @@ public class Movie extends org.apache.avro.specific.SpecificRecordBase implement
         this.year = data().deepCopy(fields()[2].schema(), other.year);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.genre)) {
-        this.genre = data().deepCopy(fields()[3].schema(), other.genre);
+      if (isValidValue(fields()[3], other.count)) {
+        this.count = data().deepCopy(fields()[3].schema(), other.count);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.genre)) {
+        this.genre = data().deepCopy(fields()[4].schema(), other.genre);
+        fieldSetFlags()[4] = true;
       }
     }
 
@@ -223,9 +252,13 @@ public class Movie extends org.apache.avro.specific.SpecificRecordBase implement
         this.year = data().deepCopy(fields()[2].schema(), other.year);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.genre)) {
-        this.genre = data().deepCopy(fields()[3].schema(), other.genre);
+      if (isValidValue(fields()[3], other.count)) {
+        this.count = data().deepCopy(fields()[3].schema(), other.count);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.genre)) {
+        this.genre = data().deepCopy(fields()[4].schema(), other.genre);
+        fieldSetFlags()[4] = true;
       }
     }
 
@@ -359,6 +392,48 @@ public class Movie extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /**
+      * Gets the value of the 'count' field.
+      * This is the count for the Combiner
+      * @return The value.
+      */
+    public java.lang.Integer getCount() {
+      return count;
+    }
+
+    /**
+      * Sets the value of the 'count' field.
+      * This is the count for the Combiner
+      * @param value The value of 'count'.
+      * @return This builder.
+      */
+    public finalproj.model.Movie.Builder setCount(int value) {
+      validate(fields()[3], value);
+      this.count = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'count' field has been set.
+      * This is the count for the Combiner
+      * @return True if the 'count' field has been set, false otherwise.
+      */
+    public boolean hasCount() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'count' field.
+      * This is the count for the Combiner
+      * @return This builder.
+      */
+    public finalproj.model.Movie.Builder clearCount() {
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'genre' field.
       * Genre of the movie
       * @return The value.
@@ -374,9 +449,9 @@ public class Movie extends org.apache.avro.specific.SpecificRecordBase implement
       * @return This builder.
       */
     public finalproj.model.Movie.Builder setGenre(finalproj.model.MovieGenre value) {
-      validate(fields()[3], value);
+      validate(fields()[4], value);
       this.genre = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -386,7 +461,7 @@ public class Movie extends org.apache.avro.specific.SpecificRecordBase implement
       * @return True if the 'genre' field has been set, false otherwise.
       */
     public boolean hasGenre() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[4];
     }
 
 
@@ -397,7 +472,7 @@ public class Movie extends org.apache.avro.specific.SpecificRecordBase implement
       */
     public finalproj.model.Movie.Builder clearGenre() {
       genre = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -408,7 +483,8 @@ public class Movie extends org.apache.avro.specific.SpecificRecordBase implement
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.title = fieldSetFlags()[1] ? this.title : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.year = fieldSetFlags()[2] ? this.year : (java.lang.CharSequence) defaultValue(fields()[2]);
-        record.genre = fieldSetFlags()[3] ? this.genre : (finalproj.model.MovieGenre) defaultValue(fields()[3]);
+        record.count = fieldSetFlags()[3] ? this.count : (java.lang.Integer) defaultValue(fields()[3]);
+        record.genre = fieldSetFlags()[4] ? this.genre : (finalproj.model.MovieGenre) defaultValue(fields()[4]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

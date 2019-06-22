@@ -5,6 +5,7 @@
      {"name": "id", "type": "string", "default" : "", "doc" : "The ID of the movie"},
      {"name": "title", "type": "string", "default" : "", "doc" : "The title of the movie"},
      {"name": "year", "type": "string", "default" : "", "doc" : "The year the movie was released"},
+     {"name": "count", "type": "int", "default": 0, "doc": "This is the count for the Combiner"}, 
      {
       "name": "genre", "doc" : "Genre of the movie",
       "type" : {
