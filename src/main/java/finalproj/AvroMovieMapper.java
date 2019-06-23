@@ -2,7 +2,6 @@ package finalproj;
 
 import java.io.IOException;
 import org.apache.avro.mapred.AvroKey;
-import org.apache.hadoop.mapreduce.lib.map.WrappedMapper.Context;
 import org.apache.hadoop.mapreduce.Mapper;
 import finalproj.model.Movie;
 import org.apache.avro.mapred.AvroValue;

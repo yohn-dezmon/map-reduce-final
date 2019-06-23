@@ -6,7 +6,6 @@ import org.apache.hadoop.mapreduce.Partitioner;
 import finalproj.model.Movie;
 import finalproj.model.MovieGenre;
 
-import org.apache.hadoop.io.NullWritable;
 
 
 public class MoviePartitioner extends

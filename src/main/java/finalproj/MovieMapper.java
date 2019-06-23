@@ -1,21 +1,17 @@
 package finalproj;
 
-import org.apache.hadoop.io.IntWritable;
+
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.log4j.Logger;
-
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-
 import org.apache.avro.mapred.AvroValue;
 import org.apache.avro.mapred.AvroKey;
 import org.apache.hadoop.io.NullWritable;
 import java.io.IOException;
 import finalproj.model.Movie;
 import finalproj.model.MovieGenre;
-import stubs.model.SimpleCard;
+
 
 //import org.apache.log4j.Logger;
 
