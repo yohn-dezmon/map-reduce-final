@@ -44,7 +44,7 @@ public class MovieMapperTest {
 	    // Now you have to configure AvroSerialization by specifying the key
 	    // writer Schema and the value writer schema.
 	    mapDriver.getConfiguration().setStrings("io.serializations", newStrings);
-	    mapDriver.getConfiguration().setStrings("avro.serialization.key.writer.schema", Movie.SCHEMA$.toString(true));
+	    mapDriver.getConfiguration().setStrings("avro.serialization.key.writer.schema", Movie.getClassSchema().toString(true));
 	    mapDriver.getConfiguration().setStrings("avro.serialization.value.writer.schema", Schema.create(Schema.Type.NULL).toString(true));
 	}
 
@@ -75,13 +75,14 @@ public class MovieMapperTest {
 		movie4.setId("131248");
 		movie4.setTitle("Brother Bear 2 (2006)");
 		
-		mapDriver.withInput(new LongWritable(), new Text("131248,Brother Bear 2 (2006),Adventure|Animation|Children|Comedy|Fantasy"));
-		mapDriver.withOutput(new AvroKey<Movie>(movie), new AvroValue<NullWritable>(NullWritable.get()));
-		mapDriver.withOutput(new AvroKey<Movie>(movie1), new AvroValue<NullWritable>(NullWritable.get()));
-		mapDriver.withOutput(new AvroKey<Movie>(movie2), new AvroValue<NullWritable>(NullWritable.get()));
-		mapDriver.withOutput(new AvroKey<Movie>(movie3), new AvroValue<NullWritable>(NullWritable.get()));
-		mapDriver.withOutput(new AvroKey<Movie>(movie4), new AvroValue<NullWritable>(NullWritable.get()));
 		
+		// outtake: |Animation|Children|Comedy|Fantasy
+		mapDriver.withInput(new LongWritable(), new Text("131248,Brother Bear 2 (2006),Adventure")).withOutput(new AvroKey<Movie>(movie), new AvroValue<NullWritable>(NullWritable.get()));
+//		mapDriver.withOutput(new AvroKey<Movie>(movie1), new AvroValue<NullWritable>(NullWritable.get()));
+//		mapDriver.withOutput(new AvroKey<Movie>(movie2), new AvroValue<NullWritable>(NullWritable.get()));
+//		mapDriver.withOutput(new AvroKey<Movie>(movie3), new AvroValue<NullWritable>(NullWritable.get()));
+//		mapDriver.withOutput(new AvroKey<Movie>(movie4), new AvroValue<NullWritable>(NullWritable.get()));
+		mapDriver.runTest();
 	}
 	
 	@Test
@@ -92,9 +93,9 @@ public class MovieMapperTest {
 //		movie.setTitle("Brother Bear 2 (2006)");
 		
 		
-		mapDriver.withInput(new LongWritable(), new Text("131248,Brother Bear 2 (2006),Adventure|Animation|Children|Comedy|Fantasy"));
+//		mapDriver.withInput(new LongWritable(), new Text("131248,Brother Bear 2 (2006),Adventure|Animation|Children|Comedy|Fantasy"));
 		mapDriver.withOutput(new AvroKey<Movie>(movie123), new AvroValue<NullWritable>(NullWritable.get()));
-		
+		mapDriver.runTest();
 	}
 
 }

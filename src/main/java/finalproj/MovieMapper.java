@@ -3,6 +3,7 @@ package finalproj;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
+// before this was .mapreduce.Mapper...
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.log4j.Logger;
 import org.apache.avro.mapred.AvroValue;
