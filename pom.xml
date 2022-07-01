@@ -9,7 +9,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <packaging>jar</packaging>
   <properties>
   	<!-- Keep Hadoop versions as properties to allow easy modification -->
-    <hadoop.version>2.6.0-cdh5.13.1</hadoop.version>
+    <hadoop.version>2.7.0</hadoop.version>
     <avro.version>1.7.7</avro.version>
     <mrunit.version>1.1.0</mrunit.version>
     <!-- Maven properties for compilation -->
